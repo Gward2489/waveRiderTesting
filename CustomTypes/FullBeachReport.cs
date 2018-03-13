@@ -7,17 +7,17 @@ namespace waveRiderTester.CustomTypes
     {
         public Beach Beach { get; set; }
 
-        public List<FullReport> Reports { get; set; }
+        public FullReport Report { get; set; }
 
         public FullBeachReport()
         {
 
         }
 
-        public FullBeachReport(Beach beach, List<FullReport> reports)
+        public FullBeachReport(Beach beach, FullReport report)
         {
             Beach = beach;
-            Reports = reports;
+            Report = report;
         }
     }
 }

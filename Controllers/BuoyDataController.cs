@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using waveRiderTester.CustomTypes;
 using waveRiderTester.GeoLocators;
 using waveRiderTester.Models;
+using waveRiderTester.ReportMakers;
 
 namespace waveRiderTester.Controllers
 {
@@ -11,19 +12,34 @@ namespace waveRiderTester.Controllers
     public class BuoyDataController: Controller
     {
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> GetAsync()
         {
             string lat = "34.2379067";
             string lon = "-77.8484527";
             SpotFinder spotFinder = new SpotFinder();
-            List<SpotDistanceFromUser> distances = spotFinder.FindSpots(lat, lon);
-
-            
-
-
             BuoyFinder buoyFinder = new BuoyFinder();
-            List<Buoy> closestSpots = buoyFinder.MatchBuoys(lat, lon);
-            return Ok(closestSpots);
+
+            List<CurrentBeachReport> currentReports = new List<CurrentBeachReport>();
+            
+            List<SpotDistanceFromUser> spotsWithUserDistance = spotFinder.FindSpots(lat, lon);
+
+            foreach(SpotDistanceFromUser obj in spotsWithUserDistance)
+            {
+                string beachLat = obj.Beach.Latitude;
+                string beachLon = obj.Beach.Longtitude;
+                List<Buoy> matchingBuoys = buoyFinder.MatchBuoys(beachLat, beachLon);
+                foreach(Buoy b in matchingBuoys)
+                {
+                    CurrentReport currentReport = await MakeCurrentReport.GetAsync(b);
+
+                    CurrentBeachReport beachAndReport = new CurrentBeachReport(obj.Beach, 
+                    currentReport);
+
+                    currentReports.Add(beachAndReport);
+                }    
+            }
+
+            return Ok(currentReports);
         }
     }
 }

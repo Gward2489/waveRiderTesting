@@ -4,34 +4,36 @@ using System.Threading.Tasks;
 using waveRiderTester.HttpCalls;
 using waveRiderTester.CustomTypes;
 using waveRiderTester.Parsers;
+using waveRiderTester.Models;
 
 namespace waveRiderTester.ReportMakers
 {
     public class Make45DayReport
     {
-        public static async Task<FullReport> GetAsync(string buoyId)
+        public static async Task<FullReport> GetAsync(Buoy buoy)
         {
-            FullReport fullReport = new FullReport();
+            FullReport fullReport = new FullReport(buoy.Name, buoy.NbdcId);
             List<SpecData> spectralReports = new List<SpecData>(); 
 
-            string buoyStandardId = buoyId + ".txt";
-            string buoySpecId = buoyId + ".spec";
+            string buoyStandardId = (buoy.NbdcId).ToUpper() + ".txt";
+            string buoySpecId = (buoy.NbdcId).ToUpper() + ".spec";
 
             string standardReportText = await GetBuoyData.FetchAsync(buoyStandardId);
             string spectralReportText = await GetBuoyData.FetchAsync(buoySpecId);
 
-            string firstChar = (spectralReportText[0]).ToString();
+            string firstCharSpec = (spectralReportText[0]).ToString();
+            string firstCharStandard = (standardReportText[0].ToString());
 
-            List<StandardData> standardReports = Parse45DayStandard.Get(standardReportText, buoyId);
+            List<StandardData> standardReports = Parse45DayStandard.Get(standardReportText, buoy.NbdcId);
 
-            if (firstChar != "<")
+            if (firstCharSpec != "<" && firstCharStandard !="<")
             {
-                spectralReports = Parse45DaySpec.Get(spectralReportText, buoyId);
-                fullReport = new FullReport(standardReports, spectralReports);
+                spectralReports = Parse45DaySpec.Get(spectralReportText, buoy.NbdcId);
+                fullReport = new FullReport(buoy.Name, buoy.NbdcId, standardReports, spectralReports);
             } 
-            else 
+            else if (firstCharStandard != "<")
             {
-                fullReport = new FullReport(standardReports);
+                fullReport = new FullReport(buoy.Name, buoy.NbdcId, standardReports);
             }
 
             return fullReport;

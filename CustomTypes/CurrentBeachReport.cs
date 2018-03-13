@@ -7,17 +7,17 @@ namespace waveRiderTester.CustomTypes
     {
         public Beach Beach { get; set; }
 
-        public List<CurrentReport> Reports { get; set; }
+        public CurrentReport Report { get; set; }
 
         public CurrentBeachReport()
         {
 
         }
         
-        public CurrentBeachReport(Beach beach, List<CurrentReport> reports)
+        public CurrentBeachReport(Beach beach, CurrentReport report)
         {
             Beach = beach;
-            Reports = reports;
+            Report = report;
         }
     }
 }
