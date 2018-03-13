@@ -20,6 +20,7 @@ namespace waveRiderTester.Controllers
             BuoyFinder buoyFinder = new BuoyFinder();
 
             List<CurrentBeachReport> currentReports = new List<CurrentBeachReport>();
+            List<FullBeachReport> fullReports = new List<FullBeachReport>();
             
             List<SpotDistanceFromUser> spotsWithUserDistance = spotFinder.FindSpots(lat, lon);
 
@@ -30,16 +31,21 @@ namespace waveRiderTester.Controllers
                 List<Buoy> matchingBuoys = buoyFinder.MatchBuoys(beachLat, beachLon);
                 foreach(Buoy b in matchingBuoys)
                 {
-                    CurrentReport currentReport = await MakeCurrentReport.GetAsync(b);
+                    // CurrentReport currentReport = await MakeCurrentReport.GetAsync(b);
 
-                    CurrentBeachReport beachAndReport = new CurrentBeachReport(obj.Beach, 
-                    currentReport);
+                    // CurrentBeachReport beachAndReport = new CurrentBeachReport(obj.Beach, 
+                    // currentReport);
 
-                    currentReports.Add(beachAndReport);
+                    // currentReports.Add(beachAndReport);
+
+                    FullReport fullReport = await Make45DayReport.GetAsync(b);
+                    FullBeachReport beachAndReport = new FullBeachReport(obj.Beach,
+                    fullReport);
+                    fullReports.Add(beachAndReport);
                 }    
             }
 
-            return Ok(currentReports);
+            return Ok(fullReports);
         }
     }
 }
