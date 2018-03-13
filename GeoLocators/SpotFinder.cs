@@ -10,7 +10,7 @@ using waveRiderTester.Models;
 
 namespace waveRiderTester.GeoLocators
 {
-    public class SpotFinder : DbContext
+    public class SpotFinder
     {
 
         public List<SpotDistanceFromUser> FindSpots(string lat, string lon)
@@ -23,12 +23,9 @@ namespace waveRiderTester.GeoLocators
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionsBuilder.UseSqlite($"Filename=/home/gward2489/workspace/waveRiderTester/Data/waveDb.db");
 
-
             using (ApplicationDbContext context = new ApplicationDbContext(optionsBuilder.Options))
             {
-
                 List<Beach> spots = context.Beach.ToList();
-
 
                 foreach(Beach spot in spots)
                 {
@@ -60,7 +57,7 @@ namespace waveRiderTester.GeoLocators
                     }
                 }
             }
-            
+
             distances = distances.OrderBy(d => d.DistanceToUser).ToList();
             return distances;
         }
