@@ -60,6 +60,8 @@ namespace waveRiderTester.GeoLocators
                     }
                 }
             }
+            
+            distances = distances.OrderBy(d => d.DistanceToUser).ToList();
             return distances;
         }
     }
