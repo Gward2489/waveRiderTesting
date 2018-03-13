@@ -27,7 +27,6 @@ namespace waveRiderTester
         {
             services.AddMvc();
             var connection = $"Filename=/home/gward2489/workspace/waveRiderTester/Data/waveDb.db";
-            Console.WriteLine($"{connection}");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
         }
 
