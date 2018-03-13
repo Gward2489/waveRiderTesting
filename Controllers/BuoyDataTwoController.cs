@@ -36,15 +36,12 @@ namespace waveRiderTester.Controllers
                 List<Buoy> matchingBuoys = buoyFinder.MatchBuoys(beachLat, beachLon);
                 foreach(Buoy b in matchingBuoys)
                 {
-
                     matchedBuoys.Add(b);
-
                 }
             }
 
-            matchedBuoys = matchedBuoys.GroupBy(x => x.BuoyId).Select(x => x.First()).ToList();
+            matchedBuoys = matchedBuoys.GroupBy(mb => mb.BuoyId).Select(mb => mb.First()).ToList();
 
-      
             foreach(Buoy b in matchedBuoys)
             {
                 Console.WriteLine("hello");
