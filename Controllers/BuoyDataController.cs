@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using waveRiderTester.CustomTypes;
 using waveRiderTester.GeoLocators;
@@ -8,6 +9,7 @@ using waveRiderTester.ReportMakers;
 
 namespace waveRiderTester.Controllers
 {
+    [EnableCors("AllowSpecificOrigin")]
     [Route("api/[controller]")]
     public class BuoyDataController: Controller
     {
