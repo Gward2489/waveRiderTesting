@@ -10,7 +10,7 @@ using waveRiderTester.Data;
 namespace waveRiderTester.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180311213300_initial")]
+    [Migration("20180312235708_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,6 +18,34 @@ namespace waveRiderTester.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
+
+            modelBuilder.Entity("waveRiderTester.Models.Beach", b =>
+                {
+                    b.Property<int>("BeachId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BeachName")
+                        .IsRequired();
+
+                    b.Property<string>("BreakType")
+                        .IsRequired();
+
+                    b.Property<string>("Latitude")
+                        .IsRequired();
+
+                    b.Property<string>("Longtitude")
+                        .IsRequired();
+
+                    b.Property<string>("Region")
+                        .IsRequired();
+
+                    b.Property<string>("State")
+                        .IsRequired();
+
+                    b.HasKey("BeachId");
+
+                    b.ToTable("Beach");
+                });
 
             modelBuilder.Entity("waveRiderTester.Models.Buoy", b =>
                 {

@@ -25,7 +25,7 @@ namespace waveRiderTester.Controllers
         {
             string results = await GetBuoyData.FetchAsync("");
             // SpecData report = ParseCurrentSpec.Get(results);
-            List<StandardData> reports = Parse45DayStandard.Get(results);
+            List<StandardData> reports = Parse45DayStandard.Get(results, "buybuy");
             return Ok (reports);
         }
 

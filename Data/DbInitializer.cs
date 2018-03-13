@@ -181,12 +181,25 @@ namespace waveRiderTester.Data
                     new Beach ("Beach", "40.022301", "-124.0856187", "Shelter Cover / Cape Mendocino Lighthouse", "California", "Northern"),
                     new Beach ("Beach", "40.7980007", "-124.2242077", "Eureka", "California", "Northern"),
                     new Beach ("Beach", "41.7486791", "-124.2144667", "Crescent City", "California", "Northern"),
-                    
-                                                            
-                                
+                    new Beach ("Beach", "42.064582", "-124.3232387", "Brookings", "Oregon", "Southern"),
+                    new Beach ("Beach", "42.4106308", "-124.4432097", "Gold Beach", "Oregon", "Southern"),
+                    new Beach ("Reef", "43.3889404", "-124.3282166", "Coos Bay", "Oregon", "Southern"),
+                    new Beach ("Beach", "43.6764832", "-124.2214456", "Winchester Bay", "Oregon", "Southern"),
+                    new Beach ("Beach", "44.028658", "-124.1538216", "Florence", "Oregon", "Southern"),
+                    new Beach ("Beach", "44.6299177", "-124.0833706", "Newport", "Oregon", "Northern"),
+                    new Beach ("Beach", "44.9744715", "-124.0341156", "Lincoln City", "Oregon", "Northern"),
+                    new Beach ("Beach", "45.3324243", "-123.9879166", "Cape Lookout", "Oregon", "Northern"),
+                    new Beach ("Beach", "45.886613", "-123.9822356", "Cannon Beach", "Oregon", "Northern"),
+                    new Beach ("Beach", "46.3596447", "-124.0816486", "Long Beach", "Washington", "Central"),
+                    new Beach ("Beach", "46.8802148", "-124.2989708", "Ocean Shores", "Washington", "Central"),
+                    new Beach ("Beach", "46.8526075", "-124.1303036", "Westport", "Washington", "Central"),
+                    new Beach ("Rivermouth", "47.9075214", "-124.645793", "La Push", "Washington", "Central"),
                 };
-
-
+                foreach(Beach b in Beaches)
+                {
+                    context.Beach.Add(b);
+                }
+                context.SaveChanges();
             }
         }
     }
