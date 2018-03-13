@@ -13,10 +13,16 @@ namespace waveRiderTester.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            string lat = "34.2141466";
-            string lon = "-77.8998191";
+            string lat = "34.2379067";
+            string lon = "-77.8484527";
             SpotFinder spotFinder = new SpotFinder();
-            List<SpotDistanceFromUser> closestSpots = spotFinder.FindSpots(lat, lon);
+            List<SpotDistanceFromUser> distances = spotFinder.FindSpots(lat, lon);
+
+            
+
+
+            BuoyFinder buoyFinder = new BuoyFinder();
+            List<Buoy> closestSpots = buoyFinder.MatchBuoys(lat, lon);
             return Ok(closestSpots);
         }
     }

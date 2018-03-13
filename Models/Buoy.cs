@@ -25,5 +25,10 @@ namespace waveRiderTester.Models
             Name = name;
             Owner = owner;
         }
+
+        public Buoy()
+        {
+            
+        }
     }
 }
