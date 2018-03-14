@@ -18,13 +18,14 @@ namespace waveRiderTester.Controllers
         {
             string lat = "34.2379067";
             string lon = "-77.8484527";
+
             SpotFinder spotFinder = new SpotFinder();
             BuoyFinder buoyFinder = new BuoyFinder();
 
             List<CurrentBeachReport> currentReports = new List<CurrentBeachReport>();
             List<FullBeachReport> fullReports = new List<FullBeachReport>();
             
-            List<SpotDistanceFromUser> spotsWithUserDistance = spotFinder.FindSpots(lat, lon);
+            List<SpotDistanceFromUser> spotsWithUserDistance = spotFinder.FindSpots(lat, lon, 5);
 
             foreach(SpotDistanceFromUser obj in spotsWithUserDistance)
             {

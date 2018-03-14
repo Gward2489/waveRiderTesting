@@ -12,8 +12,7 @@ namespace waveRiderTester.GeoLocators
 {
     public class SpotFinder
     {
-
-        public List<SpotDistanceFromUser> FindSpots(string lat, string lon)
+        public List<SpotDistanceFromUser> FindSpots(string lat, string lon, int spotCount)
         {
             double userLat = Convert.ToDouble(lat);
             double userLon = Convert.ToDouble(lon);
@@ -38,7 +37,7 @@ namespace waveRiderTester.GeoLocators
                     SpotDistanceFromUser distanceObj = new SpotDistanceFromUser(metersToSpot,
                     spot);
 
-                    if (distances.Count() < 5)
+                    if (distances.Count() < spotCount)
                     {
                         distances.Add(distanceObj);
                     }
@@ -60,6 +59,48 @@ namespace waveRiderTester.GeoLocators
 
             distances = distances.OrderBy(d => d.DistanceToUser).ToList();
             return distances;
+        }
+
+        public Beach FindSpot(string lat, string lon)
+        {
+
+            double userLat = Convert.ToDouble(lat);
+            double userLon = Convert.ToDouble(lon);
+            Beach closestBeach = new Beach();
+
+            GeoCoordinate userLocation = new GeoCoordinate(userLat, userLon);
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionsBuilder.UseSqlite($"Filename=/home/gward2489/workspace/waveRiderTester/Data/waveDb.db");
+
+            using (ApplicationDbContext context = new ApplicationDbContext(optionsBuilder.Options))
+            {
+                List<Beach> spots = context.Beach.ToList();
+                double lastDistanceFromUser = 0;
+                double count = 0;
+                foreach(Beach spot in spots)
+                {
+                    double spotLat = Convert.ToDouble(spot.Latitude);
+                    double spotLon = Convert.ToDouble(spot.Longtitude);
+
+                    GeoCoordinate spotLocation = new GeoCoordinate(spotLat, spotLon);
+                    double distanceFromUser = userLocation.GetDistanceTo(spotLocation);
+
+                    if (count == 0)
+                    {
+                        count ++;
+                        closestBeach = spot;
+                        lastDistanceFromUser = distanceFromUser;
+                    }
+
+                    if (distanceFromUser < lastDistanceFromUser)
+                    {
+                        closestBeach = spot;
+                        lastDistanceFromUser =distanceFromUser;
+                    }
+                }
+            }
+
+            return closestBeach;
         }
     }
 }
