@@ -28,7 +28,7 @@ namespace waveRiderTester.Controllers
             SpotFinder spotFinder = new SpotFinder();
             BuoyFinder buoyFinder = new BuoyFinder();
 
-            List<SpotDistanceFromUser> spotsWithUserDistance = spotFinder.FindSpots(lat, lon);
+            List<SpotDistanceFromUser> spotsWithUserDistance = spotFinder.FindSpots(lat, lon, 5);
             foreach(SpotDistanceFromUser obj in spotsWithUserDistance)
             {   
                 string beachLat = obj.Beach.Latitude;
