@@ -37,7 +37,7 @@ namespace waveRiderTester.GeoLocators
                     SpotDistanceFromUser distanceObj = new SpotDistanceFromUser(metersToSpot,
                     spot);
 
-                    if (distances.Count() <= spotCount)
+                    if (distances.Count() < spotCount)
                     {
                         distances.Add(distanceObj);
                     }
