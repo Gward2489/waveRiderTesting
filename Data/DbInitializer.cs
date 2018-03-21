@@ -83,7 +83,7 @@ namespace waveRiderTester.Data
                     new Beach ("Beach", "33.8867209", "-78.4552517", "Ocean Isle Beach", "North Carolina", "Southern"),
                     new Beach ("Beach", "33.9121419", "-78.3070927", "Holden Beach", "North Carolina", "Southern"),
                     new Beach ("Beach", "34.0306678", "-77.9106797", "Carolina Beach", "North Carolina", "Southern"),
-                    new Beach ("Beach", "34.1627258", "-77.8471397", "Masonboro Insland", "North Carolina", "Southern"),
+                    new Beach ("Beach", "34.1627258", "-77.8471397", "Masonboro Island", "North Carolina", "Southern"),
                     new Beach ("Beach", "34.2037637", "-77.8139237", "Wrightsville Beach", "North Carolina", "Southern"),
                     // new Beach ("Beach", "34.4247527", "-77.5616607", "Topsail Beach / Surf City", "North Carolina", "Southern"),
                     // new Beach ("Beach", "34.5731646", "-77.2827437", "Camp Lejune / Sneads Ferry", "North Carolina", "Southern"),
