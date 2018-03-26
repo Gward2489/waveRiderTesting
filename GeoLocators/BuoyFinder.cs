@@ -19,7 +19,7 @@ namespace waveRiderTester.GeoLocators
             List<Buoy> matchedBuoys = new List<Buoy>();
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlite($"Filename=/home/gward2489/workspace/waveRiderTester/Data/waveDb.db");
+            optionsBuilder.UseSqlite($"Filename=/var/www/garrettwarddev.com/waveServer/Data/waveDb.db");
 
             using (ApplicationDbContext context = new ApplicationDbContext(optionsBuilder.Options))
             {

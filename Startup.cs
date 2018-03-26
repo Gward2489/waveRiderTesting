@@ -28,7 +28,7 @@ namespace waveRiderTester
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin", builder =>
-                    builder.WithOrigins("http://localhost:5000")
+                    builder.WithOrigins("http://localhost:5000", "https://www.waverider.garrettwarddev.com","https://waverider.garrettwarddev.com","http://localhost:5000","http://localhost:8080","http:127.0.0.1:5000")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowAnyOrigin()
@@ -37,7 +37,7 @@ namespace waveRiderTester
             }
             );
             services.AddMvc();
-            var connection = $"Filename=/home/gward2489/workspace/waveRiderTester/Data/waveDb.db";
+            var connection = $"Filename=/var/www/garrettwarddev.com/waveServer/Data/waveDb.db";
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connection));
         }
 
@@ -48,6 +48,12 @@ namespace waveRiderTester
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:5000", "https://www.waverider.garrettwarddev.com","https://waverider.garrettwarddev.com","http://localhost:5000","http://localhost:8080","http:127.0.0.1:5000")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+            );
 
             app.UseMvc();
         }

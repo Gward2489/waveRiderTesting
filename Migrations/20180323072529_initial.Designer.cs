@@ -10,7 +10,7 @@ using waveRiderTester.Data;
 namespace waveRiderTester.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180312235708_initial")]
+    [Migration("20180323072529_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
