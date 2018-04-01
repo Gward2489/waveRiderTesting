@@ -6,6 +6,10 @@ using System.Linq;
 using waveRiderTester.CustomTypes;
 using waveRiderTester.ReportMakers;
 using System.Threading.Tasks;
+
+// This controller allows for a user to request current buoy data by passing in
+// a buoy id 
+
 namespace waveRiderTester.Controllers
 {
     [EnableCors("AllowSpecificOrigin")]
@@ -21,9 +25,13 @@ namespace waveRiderTester.Controllers
         [HttpGet("{nbdcId}")]
         public async Task<IActionResult> GetCurrentBuoyData(string nbdcId)
         {
+            // retreive buoy information from database 
             Buoy buoy = _context.Buoy.Single(b => b.NbdcId == nbdcId);
+
+            // use buoy data to retreive current report data
             CurrentReport currentReport = await MakeCurrentReport.GetAsync(buoy);
 
+            // return current report
             return Ok(currentReport);
 
         }
