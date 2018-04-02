@@ -1,6 +1,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
+// returns plain text file converted to string containing 45 days 
+// worth of ocean data for given buoy
+
 namespace waveRiderTester.HttpCalls
 {
     public class GetBuoyData
@@ -15,11 +18,7 @@ namespace waveRiderTester.HttpCalls
             // store content into new httpContent class
             using (HttpContent content = res.Content)
             {
-                // Console.WriteLine(res);
-                // Console.WriteLine(content);
                 string data = await content.ReadAsStringAsync();
-                // string line = data.Substring(140, 71);
-                // Console.WriteLine(line);                                                
                 buoyData = data;
             }
             return buoyData;

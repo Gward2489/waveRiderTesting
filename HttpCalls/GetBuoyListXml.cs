@@ -2,6 +2,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 
+// gets xml of NOAA buoys
+
 namespace waveRiderTester.HttpCalls
 {
     public class GetBuoyListXml
