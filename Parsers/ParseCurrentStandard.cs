@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using waveRiderTester.CustomTypes;
 
+// this class is used to parse the most recent standard data from a buoy 
+
 namespace waveRiderTester.Parsers
 {
     public class ParseCurrentStandard
     {
         public static StandardData Get(string waveReportText, string buoyId)
         {
-            // Console.WriteLine(waveReportText);
             StandardData report = new StandardData();
             int count = 0;
-            Console.WriteLine(waveReportText);
             string pattern = @"\n\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+\s+\S+";
 
             foreach(Match m in Regex.Matches(waveReportText, pattern))
             {
-                Console.WriteLine(m.Value);
                 count ++;
                 List<string> properties = new List<string>();
 

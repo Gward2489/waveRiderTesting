@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using waveRiderTester.CustomTypes;
 
+// This method is used to parse only the most current spectral report data from a buoy
+
 namespace waveRiderTester.Parsers
 {
     public class ParseCurrentSpec
@@ -15,16 +17,16 @@ namespace waveRiderTester.Parsers
             SpecData report = new SpecData();
             foreach (Match m in Regex.Matches(waveReportText, pattern))
             {
-                Console.WriteLine(m.Value);
                 count ++;
                 List<string> properties = new List<string>();
                 
+                // the third line is the first line of data, so check the counter
+                // for a value of 2
                 if (count == 2)
                 {
                     string secondPattern = @"\S+";
                     foreach (Match mm in Regex.Matches(m.Value, secondPattern))
                     {
-                        Console.WriteLine(mm.Value);
                         string prop = mm.Value;
                         properties.Add(prop);
                     }   
@@ -37,17 +39,13 @@ namespace waveRiderTester.Parsers
                     properties[14], buoyId);
                 } 
                 
+                // break the loop after it reads the third line
                 if (count == 2 )
                 {
                     break;
                 }
             }
-            Console.WriteLine(report.Day);
-
             return report;
-           //     string line = waveReportText.Substring(140, 71);
-           //     Console.WriteLine(line);
-           //     return line;
         }
     }
 }

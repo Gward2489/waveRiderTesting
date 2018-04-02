@@ -4,6 +4,7 @@ using waveRiderTester.CustomTypes;
 using waveRiderTester.Parsers;
 using waveRiderTester.Models;
 
+// this class is used to create a CurrentReport object and populate it with data
 namespace waveRiderTester.ReportMakers
 {
     public class MakeCurrentReport

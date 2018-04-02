@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using waveRiderTester.CustomTypes;
 
+// this class parsed the standard data from a buoy's text file
+
 namespace waveRiderTester.Parsers
 {
     public class Parse45DayStandard
