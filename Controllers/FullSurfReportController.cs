@@ -10,6 +10,13 @@ using waveRiderTester.GeoLocators;
 using waveRiderTester.Models;
 using waveRiderTester.ReportMakers;
 
+// this controller allows users to request 45 day surf report
+// data for beaches by geolocation, or specific spot id
+
+// this controller mirrors CurrentSurfReportController, 
+// using the FullBeachReport type in place of the CurrentBeachReport type
+// see comments in CurrentsurfReportController for full code explination
+
 namespace waveRiderTester.Controllers
 {
     [EnableCors("AllowSpecificOrigin")]

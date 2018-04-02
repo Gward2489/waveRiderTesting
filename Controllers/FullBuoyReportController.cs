@@ -8,6 +8,8 @@ using waveRiderTester.ReportMakers;
 using System.Threading.Tasks;
 using System;
 
+// this controller allows users to request 45 day report data 
+// from a buoy 
 namespace waveRiderTester.Controllers
 {
     [EnableCors("AllowSpecificOrigin")]
@@ -20,13 +22,17 @@ namespace waveRiderTester.Controllers
             _context = ctx;
         }
 
+
         [HttpGet("{nbdcId}")]
         public async Task<IActionResult> Get45DayBuoyData(string nbdcId)
         {
-
+            // find requested buoy
             Buoy buoy = _context.Buoy.Single(b => b.NbdcId == nbdcId);
+
+            // get report data for buoy
             FullReport fullReport = await Make45DayReport.GetAsync(buoy);
             
+            // return report data
             return Ok(fullReport);
         }
 

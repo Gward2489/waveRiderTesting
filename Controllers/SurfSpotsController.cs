@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using waveRiderTester.Data;
 using waveRiderTester.Models;
 
+// this controller allows users to request a list of beaches
+// supported by wave rider. Users can request the full list or beaches
+// by a specific state
+
 namespace waveRiderTester.Controllers
 {
     [EnableCors("AllowSpecificOrigin")]
@@ -19,19 +23,25 @@ namespace waveRiderTester.Controllers
             _context = ctx;
         }
 
+        // this is the route for the full list of beaches
         [HttpGet]
         public IActionResult Get()
         {
+            // retreive beaches from db
             List<Beach> beaches = _context.Beach.ToList();
-                        
+
+            // return beaches    
             return Ok(beaches);
         }
 
+        //  this is the route to get list of beaches by state
         [HttpGet("{state}")]
         public IActionResult Get(string state)
         {
+            // get beaches matching state
             List<Beach> stateBeaches = _context.Beach.Where(b => b.State == state).ToList();
 
+            // return beaches
             return Ok(stateBeaches);
         }
     }
