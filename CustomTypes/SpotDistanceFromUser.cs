@@ -1,5 +1,7 @@
 using waveRiderTester.Models;
 
+// this class is designed to hold data for a beach and its distance from a user
+
 namespace waveRiderTester.CustomTypes
 {
     public class SpotDistanceFromUser

@@ -1,3 +1,5 @@
+// this class is designed to hold all of the standard report data for a single buoy
+
 namespace waveRiderTester.CustomTypes
 {
     public class StandardData

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using waveRiderTester.Models;
 
+// this class is designed to hold data for a beach and its current surf report data
+ 
 namespace waveRiderTester.CustomTypes
 {
     public class CurrentBeachReport

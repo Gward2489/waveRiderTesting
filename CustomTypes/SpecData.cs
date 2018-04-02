@@ -1,3 +1,7 @@
+
+// this class is designed to hold all the spectral data pulled from 
+// a single buoy
+
 namespace waveRiderTester.CustomTypes
 {
     public class SpecData

@@ -1,3 +1,7 @@
+
+// this class is designed to hold a single report reflecting data pulled from an individual buoy
+ 
+
 namespace waveRiderTester.CustomTypes
 {
     public class CurrentReport

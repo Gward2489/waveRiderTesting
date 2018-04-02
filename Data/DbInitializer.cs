@@ -6,23 +6,31 @@ using Microsoft.Extensions.DependencyInjection;
 using waveRiderTester.HttpCalls;
 using waveRiderTester.Models;
 
+// this class contains methods for seeding the database/ checking the db for data
+
 namespace waveRiderTester.Data
 {
     public class DbInitializer
     {
         public static async void InitializeBuoysAsync(IServiceProvider serviceProvider)
         {
+            // get db context
            using (var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
            {
+                // check if db has buoys or not    
                 if (context.Buoy.Any())
                 {
-                    return;   // DB has been seeded
+                    return;   // db has been seeded
                 }
 
+                // get xml doc of buoys from NOAA
                 XmlDocument buoyXml = await GetBuoyListXml.FetchAsync();
+                // get xml node list of buoys from xml doc
                 XmlNodeList buoyList = buoyXml.GetElementsByTagName("station");
+                // itterate through nodes
                 foreach(XmlNode buoy in buoyList)
                 {
+                    // populate a buoy model and add it to the databse
                     string buoyId = buoy.Attributes["id"].Value;
                     string lat = buoy.Attributes["lat"].Value;
                     string lon = buoy.Attributes["lon"].Value;
@@ -32,19 +40,25 @@ namespace waveRiderTester.Data
                     context.Buoy.Add(newBuoy);                                                            
                 }
 
+                // save changes to db
                 context.SaveChanges();
 
            } 
         }
         public static void InitializeBeachesAsync(IServiceProvider serviceProvider)
         {
+            // get db context
             using (var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
+                // check db for beaches
                 if (context.Beach.Any())
                 {
                     return;   // DB has been seeded
                 }
 
+                // create an array with beach data. beaches commented out return standard data
+                // but no spectral data. This amount of data is insufficient to provide 
+                // quality surf reports.
                 var Beaches = new Beach[]
                 {
                     // new Beach ("Breakwater", "26.3341576", "-80.0752845", "Boca Inlet", "Florida", "Southern"),
@@ -195,10 +209,14 @@ namespace waveRiderTester.Data
                     new Beach ("Beach", "46.8526075", "-124.1303036", "Westport", "Washington", "Central"),
                     // new Beach ("Rivermouth", "47.9075214", "-124.645793", "La Push", "Washington", "Central"),
                 };
+
+                // add beaches to db
                 foreach(Beach b in Beaches)
                 {
                     context.Beach.Add(b);
                 }
+
+                // save changes to db
                 context.SaveChanges();
             }
         }
